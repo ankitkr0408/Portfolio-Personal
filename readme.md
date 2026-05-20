@@ -61,3 +61,10 @@ components/
   Footer.tsx
 public/                   Static assets
 ```
+
+
+## Feature to work on personal level
+1. resume creator for the jd
+2. freelance bill genrator
+3. same admin panel to manage the leads and all overall to get the insights of the works.
+4. something products to acknowledge my knowloedge and business pov to the different users for thier mindset and belonginess check this out also and fig out 
