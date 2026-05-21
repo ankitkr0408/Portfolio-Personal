@@ -4,7 +4,7 @@ Next.js 14 (App Router) + TypeScript + Tailwind CSS.
 
 ## Information architecture
 
-- **Services I offer** — the four offerings I sell.
+- **Services I offer** — the four offerings I sells.
 - **Experience** — the roles I've held (internships + full-time jobs).
 - **Freelance** — separate, since it's about availability, not a service or a past role.
 
