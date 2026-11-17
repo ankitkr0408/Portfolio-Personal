@@ -16,6 +16,7 @@ export default function Footer() {
         </nav>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span>© {new Date().getFullYear()} {profile.name}</span>
+          <a href={profile.instagram} target="_blank" rel="noreferrer" className="hover:text-white">@{profile.instagramHandle}</a>
           <a href={`mailto:${profile.email}`} className="hover:text-white">{profile.email}</a>
         </div>
       </div>

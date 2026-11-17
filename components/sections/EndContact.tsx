@@ -16,6 +16,7 @@ export default function EndContact() {
       </a>
       <div className="mt-6 flex justify-center gap-6 text-sm text-neutral-400">
         <a className="hover:text-white" href={profile.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
+        <a className="hover:text-white" href={profile.instagram} target="_blank" rel="noreferrer">Instagram</a>
         <a className="hover:text-white" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
         <a className="hover:text-white" href={`tel:${profile.phone.replace(/\s/g, "")}`}>{profile.phone}</a>
       </div>

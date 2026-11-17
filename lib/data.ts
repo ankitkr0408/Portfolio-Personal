@@ -13,6 +13,8 @@ export const profile = {
   github: "ankitkr0408",
   githubUrl: "https://github.com/ankitkr0408",
   linkedin: "https://www.linkedin.com/in/your-handle", // DEMO — replace
+  instagram: "https://www.instagram.com/ankit.aitalks/",
+  instagramHandle: "ankit.aitalks",
 };
 
 // DRAFT copy from your resume. Edit with real client details / numbers.
@@ -325,3 +327,6 @@ export const hats = [
     proof: "4-environment, zero-downtime pipeline",
   },
 ];
+
+// Brand identity: the two handles used for search / SEO.
+export const brandNames = ["ankit.aitalks", "ankitkr.0408"];

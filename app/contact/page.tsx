@@ -24,6 +24,7 @@ export default function ContactPage() {
         <div className="flex flex-wrap gap-3">
           <a href={`mailto:${profile.email}?subject=Project%20inquiry`} className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black">Start a project</a>
           <a href={profile.linkedin} target="_blank" rel="noreferrer" className="rounded-full border border-white/20 px-6 py-2.5 text-sm hover:bg-white/10">LinkedIn</a>
+          <a href={profile.instagram} target="_blank" rel="noreferrer" className="rounded-full border border-white/20 px-6 py-2.5 text-sm hover:bg-white/10">Instagram</a>
           <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="rounded-full border border-white/20 px-6 py-2.5 text-sm hover:bg-white/10">GitHub</a>
         </div>
       </div>
