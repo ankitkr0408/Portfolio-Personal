@@ -1,57 +1,30 @@
 import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
+import { services } from "@/lib/data";
 
-export const metadata = { title: "Services" };
-
-const services = [
-  {
-    slug: "web-development",
-    title: "Web Development",
-    blurb: "Marketing sites, dashboards, and full-stack web apps built to ship.",
-  },
-  {
-    slug: "mobile-apps",
-    title: "Mobile Apps",
-    blurb: "Cross-platform mobile apps from prototype to App Store / Play Store.",
-  },
-  {
-    slug: "consulting",
-    title: "Consulting",
-    blurb: "Technical strategy, architecture reviews, and hands-on advisory work.",
-  },
-  {
-    slug: "branding",
-    title: "Branding",
-    blurb: "Visual identity, landing pages, and product-led brand systems.",
-  },
-];
+export const metadata = {
+  title: "Services",
+  description: "Web development, mobile apps, AI and DevOps consulting, and landing pages by a freelance engineer.",
+};
 
 export default function ServicesPage() {
   return (
-    <section className="space-y-8">
-      <header className="space-y-3">
-        <h1 className="text-4xl font-bold tracking-tight">Services I Offer</h1>
-        <p className="text-gray-600 dark:text-gray-300 max-w-2xl">
-          Four ways I work with clients. Pick the closest fit — or{" "}
-          <Link href="/contact" className="underline">get in touch</Link> if
-          you&apos;d like to scope something custom.
-        </p>
-      </header>
-      <div className="grid gap-4 sm:grid-cols-2">
+    <section>
+      <PageHeader eyebrow="Services" title="What I build">
+        Four ways to work together. Pick the closest fit or <Link href="/contact" className="underline">scope something custom</Link>.
+      </PageHeader>
+      <div className="grid gap-5 sm:grid-cols-2">
         {services.map((s) => (
-          <Link
-            key={s.slug}
-            href={`/services/${s.slug}`}
-            className="group rounded-xl border border-gray-200 dark:border-gray-800 p-6 hover:border-gray-400 dark:hover:border-gray-600 transition"
-          >
-            <h2 className="text-xl font-semibold group-hover:underline">
-              {s.title}
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              {s.blurb}
-            </p>
+          <Link key={s.slug} href={`/services/${s.slug}`} className="group rounded-2xl border border-white/10 bg-neutral-950 p-6 transition hover:border-white/40">
+            <h2 className="text-xl font-semibold group-hover:underline">{s.title}</h2>
+            <p className="mt-2 text-sm text-neutral-400">{s.blurb}</p>
           </Link>
         ))}
       </div>
+      <p className="mt-10 flex flex-wrap gap-6 text-sm text-neutral-400">
+        <Link href="/freelance" className="underline underline-offset-4 hover:text-white">Freelance details →</Link>
+        <Link href="/services/consulting" className="underline underline-offset-4 hover:text-white">AI &amp; DevOps →</Link>
+      </p>
     </section>
   );
 }

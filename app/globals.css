@@ -7,15 +7,21 @@
   --foreground: #0a0a0a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Dark-only theme */
+:root { --background: #0a0a0a; --foreground: #ededed; color-scheme: dark; }
+html { scroll-behavior: smooth; }
+
+/* Blueprint outline heading: outlined text that fills on hover */
+.blueprint {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(237, 237, 237, 0.7);
+  transition: color 0.35s ease, -webkit-text-stroke-color 0.35s ease;
+}
+.blueprint:hover { color: #ededed; -webkit-text-stroke-color: #ededed; }
