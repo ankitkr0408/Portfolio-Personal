@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SplineRobot from "@/components/SplineRobot";
+import AskAIButton from "@/components/AskAIButton";
 import Section from "@/components/sections/Section";
 import ScrollMarquee from "@/components/ScrollMarquee";
 import Hats from "@/components/sections/Hats";
@@ -29,6 +30,9 @@ export default function LandingPage() {
             Build it. Automate it. <span className="font-serif italic">Keep it running.</span>
           </h1>
           <p className="mt-4 text-neutral-300">{profile.pitch}</p>
+          <AskAIButton className="pointer-events-auto mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium text-white backdrop-blur-md transition hover:border-rose-400/60 hover:bg-rose-500/20">
+            <span aria-hidden>✦</span> Ask anything about me
+          </AskAIButton>
         </div>
 
       </div>

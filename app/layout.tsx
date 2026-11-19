@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import IntroOverlay from "@/components/IntroOverlay";
 import SiteChrome from "@/components/SiteChrome";
+import ChatBot from "@/components/ChatBot";
 import { brandNames, profile, siteUrl } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <IntroOverlay />
         <SiteChrome>{children}</SiteChrome>
+        <ChatBot />
       </body>
     </html>
   );

@@ -328,5 +328,12 @@ export const hats = [
   },
 ];
 
+// Shown on /freelance and used by the chat assistant.
+export const freelanceFacts = [
+  { label: "Typical engagement", value: "2–8 weeks" },
+  { label: "Working style", value: "Async + weekly sync" },
+  { label: "Timezone", value: "IST · flexible" },
+];
+
 // Brand identity: the two handles used for search / SEO.
 export const brandNames = ["ankit.aitalks", "ankitkr.0408"];

@@ -2,17 +2,12 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import CaseStudies from "@/components/sections/CaseStudies";
+import { freelanceFacts as facts } from "@/lib/data";
 
 export const metadata = {
   title: "Freelance",
   description: "Hire a freelance full-stack AI engineer for web, mobile and automation projects.",
 };
-
-const facts = [
-  { label: "Typical engagement", value: "2–8 weeks" },
-  { label: "Working style", value: "Async + weekly sync" },
-  { label: "Timezone", value: "IST · flexible" },
-];
 
 export default function FreelancePage() {
   return (
