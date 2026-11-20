@@ -25,3 +25,11 @@ html { scroll-behavior: smooth; }
   transition: color 0.35s ease, -webkit-text-stroke-color 0.35s ease;
 }
 .blueprint:hover { color: #ededed; -webkit-text-stroke-color: #ededed; }
+
+/* Iceberg font class */
+.iceberg-regular {
+  font-family: "Iceberg", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+

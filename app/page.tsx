@@ -8,6 +8,7 @@ import Bento from "@/components/sections/Bento";
 import CaseStudies from "@/components/sections/CaseStudies";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import ProjectGrid from "@/components/sections/ProjectGrid";
+import ReelsDeck from "@/components/sections/ReelsDeck";
 import EndContact from "@/components/sections/EndContact";
 import { profile } from "@/lib/data";
 
@@ -70,6 +71,7 @@ export default function LandingPage() {
           <Link href="/mentoring" className="underline underline-offset-4">Mentoring →</Link>
         </div>
       </Section>
+      <ReelsDeck />
       <EndContact />
     </div>
   );
