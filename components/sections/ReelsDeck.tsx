@@ -53,18 +53,18 @@ const DEFAULT_REELS: ReelItem[] = [
 
 // Resting transforms for 4 cards (fanned / clustered together)
 const RESTING_CONFIG = [
-  { rotate: -6, translateY: 6, margin: 0 },
-  { rotate: -2, translateY: -6, margin: 0 },
-  { rotate: 2, translateY: 4, margin: 0 },
-  { rotate: 6, translateY: 10, margin: 0 },
+  { rotate: -7, translateY: 10 },
+  { rotate: -2, translateY: -6 },
+  { rotate: 2, translateY: 4 },
+  { rotate: 7, translateY: 12 },
 ];
 
-// Spreading / freely side transforms when hovering the deck
+// Generous spreading ("freely side") when hovering the deck
 const SPREAD_CONFIG = [
-  { translateX: -50, rotate: -3 },
-  { translateX: -16, rotate: -1 },
-  { translateX: 16, rotate: 1 },
-  { translateX: 50, rotate: 3 },
+  { translateX: -130, rotate: -4 },
+  { translateX: -42, rotate: -1 },
+  { translateX: 42, rotate: 1 },
+  { translateX: 130, rotate: 4 },
 ];
 
 export default function ReelsDeck({ items = DEFAULT_REELS }: { items?: ReelItem[] }) {
@@ -103,10 +103,10 @@ export default function ReelsDeck({ items = DEFAULT_REELS }: { items?: ReelItem[
         </svg>
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-4">
+      <div className="mx-auto flex max-w-7xl flex-col items-center px-4">
         {/* Main interactive cards container */}
         <div
-          className="relative flex items-center justify-center py-8"
+          className="relative flex items-center justify-center py-12"
           onMouseEnter={() => setIsDeckHovered(true)}
           onMouseLeave={() => {
             setIsDeckHovered(false);
@@ -128,16 +128,18 @@ export default function ReelsDeck({ items = DEFAULT_REELS }: { items?: ReelItem[
 
               if (isHovered) {
                 // Focus card: pops out, straightens, scales up, highest z-index
-                scale = 1.08;
+                scale = 1.12;
                 rotate = 0;
-                translateY = -18;
-                zIndex = 40;
+                translateY = -28;
+                zIndex = 50;
               } else if (hoveredIdx !== null) {
-                // Sibling cards give extra space to the hovered card
+                // Sibling cards give generous breathing space to the hovered card
                 if (idx < hoveredIdx) {
-                  translateX -= 24;
+                  translateX -= 45;
+                  rotate -= 2;
                 } else {
-                  translateX += 24;
+                  translateX += 45;
+                  rotate += 2;
                 }
               }
 
