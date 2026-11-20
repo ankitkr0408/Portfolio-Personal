@@ -1,7 +1,8 @@
-import { profile } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import BlueprintHeading from "../BlueprintHeading";
 
-export default function EndContact() {
+export default async function EndContact() {
+  const { profile } = await getContent();
   return (
     <section id="contact" className="border-t border-white/10 bg-neutral-950 pb-48 pt-28 text-center">
       <p className="mb-4 text-xs uppercase tracking-[0.25em] text-neutral-500">The end — or the beginning</p>

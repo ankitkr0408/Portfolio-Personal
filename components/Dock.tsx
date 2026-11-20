@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { profile } from "@/lib/data";
+import type { Profile } from "@/lib/data";
 
 type IconProps = { className?: string };
 const svg = (children: React.ReactNode) =>
@@ -31,7 +31,7 @@ const pages = [
   { href: "/impact", label: "Impact", Icon: Spark, match: ["/experience", "/mentoring", "/blog", "/about"] },
 ];
 
-const contactLinks = [
+const buildContactLinks = (profile: Profile) => [
   { label: "Email me", sub: profile.email, href: `mailto:${profile.email}?subject=Project%20inquiry`, Icon: Mail, external: false },
   { label: "Instagram", sub: `@${profile.instagramHandle}`, href: profile.instagram, Icon: Instagram, external: true },
   { label: "LinkedIn", sub: "Connect", href: profile.linkedin, Icon: Linkedin, external: true },
@@ -41,7 +41,8 @@ const contactLinks = [
 const MAX_SCALE = 1.35;
 const RANGE = 110;
 
-export default function Dock() {
+export default function Dock({ profile }: { profile: Profile }) {
+  const contactLinks = buildContactLinks(profile);
   const pathname = usePathname();
   const items = useRef<(HTMLElement | null)[]>([]);
   const wrap = useRef<HTMLDivElement>(null);

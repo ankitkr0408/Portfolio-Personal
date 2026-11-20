@@ -2,19 +2,17 @@
 // It matches a question to a topic (with typo and Hinglish tolerance) and builds
 // the answer from lib/data.ts, so editing your data updates the bot too.
 // Every answer ends with follow-up questions, so the chat keeps looping.
-import {
-  caseStudies,
-  experience,
-  freelanceFacts,
-  hats,
-  impact,
-  profile,
-  projects,
-  services,
-  sites,
-  skills,
-  workflow,
-} from "./data";
+import { defaultContent, type SiteContent } from "./data";
+
+// The content the bot answers from. Starts as the built-in defaults; the ChatBot component
+// calls setBotContent() with the live (admin-edited) content.
+let { caseStudies, experience, freelanceFacts, hats, impact, profile, projects, services, sites, skills, workflow } =
+  defaultContent;
+
+export function setBotContent(c: SiteContent) {
+  ({ caseStudies, experience, freelanceFacts, hats, impact, profile, projects, services, sites, skills, workflow } = c);
+  derive();
+}
 
 export type BotReply = { id: string; text: string; chips: string[] };
 
@@ -22,9 +20,9 @@ export type BotReply = { id: string; text: string; chips: string[] };
 
 const mail = (subject = "Project inquiry") =>
   `[${profile.email}](mailto:${profile.email}?subject=${encodeURIComponent(subject)})`;
-const tel = `[${profile.phone}](tel:${profile.phone.replace(/\s/g, "")})`;
-const hasLinkedIn = !/your-handle/i.test(profile.linkedin);
-const current = experience.find((j) => j.current) ?? experience[0];
+let tel = "";
+let hasLinkedIn = false;
+let current = experience[0];
 const fact = (label: string) => freelanceFacts.find((f) => f.label === label)?.value ?? "";
 const clientName = (c: (typeof caseStudies)[number]) => c.client.split(" — ")[0];
 const external = (href: string) => /^https?:\/\//.test(href) && !/github\.com\/[^/]+\/?$/.test(href);
@@ -172,7 +170,9 @@ const TECH_EXTRA: Record<string, string[]> = {
   Serverless: ["serverless"],
 };
 
-const TECH: { name: string; category: string; aliases: string[] }[] = Object.entries(skills)
+let TECH: { name: string; category: string; aliases: string[] }[] = [];
+
+const buildTech = () => Object.entries(skills)
   .flatMap(([category, list]) =>
     list.map((name) => ({
       name,
@@ -183,6 +183,15 @@ const TECH: { name: string; category: string; aliases: string[] }[] = Object.ent
   )
   // longer aliases first so "react native" wins over "react"
   .sort((a, b) => Math.max(...b.aliases.map((x) => x.length)) - Math.max(...a.aliases.map((x) => x.length)));
+
+// Values computed from the content; re-run whenever the content changes.
+function derive() {
+  tel = `[${profile.phone}](tel:${profile.phone.replace(/\s/g, "")})`;
+  hasLinkedIn = !/your-handle/i.test(profile.linkedin);
+  current = experience.find((j) => j.current) ?? experience[0];
+  TECH = buildTech();
+}
+derive();
 
 const UNKNOWN_TECH = [
   "java", "kotlin", "swift", "php", "laravel", "django", "flask", "fastapi", "ruby", "rails", "rust", "c++", "c#",

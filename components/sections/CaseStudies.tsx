@@ -1,8 +1,9 @@
 import Link from "next/link";
 import CaseText from "../CaseText";
-import { caseStudies } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function CaseStudies({ limit }: { limit?: number }) {
+export default async function CaseStudies({ limit }: { limit?: number }) {
+  const { caseStudies } = await getContent();
   const list = limit ? caseStudies.slice(0, limit) : caseStudies;
   return (
     <div className="grid gap-5 md:grid-cols-2">

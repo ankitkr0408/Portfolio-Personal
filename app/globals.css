@@ -20,6 +20,8 @@ html { scroll-behavior: smooth; }
 
 /* Blueprint outline heading: outlined text that fills on hover */
 .blueprint {
+  /* Static font on purpose: variable system fonts (SF Pro) have overlapping contours that show up as glitches inside the stroke. */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: transparent;
   -webkit-text-stroke: 1px rgba(237, 237, 237, 0.7);
   transition: color 0.35s ease, -webkit-text-stroke-color 0.35s ease;
@@ -33,3 +35,14 @@ html { scroll-behavior: smooth; }
   font-style: normal;
 }
 
+
+/* Ask-me-anything doodle: a little head-shake every few seconds */
+@keyframes ask-wiggle {
+  0%, 70%, 100% { transform: rotate(0) scale(1); }
+  74% { transform: rotate(-14deg) scale(1.15); }
+  80% { transform: rotate(12deg) scale(1.15); }
+  86% { transform: rotate(-8deg) scale(1.08); }
+  92% { transform: rotate(5deg) scale(1.03); }
+}
+.ask-wiggle { animation: ask-wiggle 4s ease-in-out infinite; transform-origin: 50% 80%; }
+@media (prefers-reduced-motion: reduce) { .ask-wiggle { animation: none; } }

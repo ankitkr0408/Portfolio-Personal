@@ -1,8 +1,8 @@
-import { profile } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-async function getUser() {
+async function getUser(handle: string) {
   try {
-    const r = await fetch(`https://api.github.com/users/${profile.github}`, {
+    const r = await fetch(`https://api.github.com/users/${encodeURIComponent(handle)}`, {
       next: { revalidate: 3600 },
     });
     if (!r.ok) return null;
@@ -13,7 +13,8 @@ async function getUser() {
 }
 
 export default async function GithubStats() {
-  const u = await getUser();
+  const { profile } = await getContent();
+  const u = await getUser(profile.github);
   const stats = [
     { label: "Public repos", value: u?.public_repos ?? "—" },
     { label: "Followers", value: u?.followers ?? "—" },
@@ -31,7 +32,7 @@ export default async function GithubStats() {
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://github-readme-streak-stats.herokuapp.com/?user=${profile.github}&theme=dark&background=0A0A0A&hide_border=true`}
+        src={`https://github-readme-streak-stats.herokuapp.com/?user=${encodeURIComponent(profile.github)}&theme=dark&background=0A0A0A&hide_border=true`}
         alt="GitHub streak"
         className="w-full max-w-xl"
       />

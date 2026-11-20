@@ -2,19 +2,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import BlueprintHeading from "@/components/BlueprintHeading";
-import { projects } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const { projects } = await getContent();
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { projects } = await getContent();
   const p = projects.find((x) => x.slug === params.slug);
   if (!p) return {};
   return { title: `${p.title} — Project`, description: p.blurb };
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const { projects } = await getContent();
   const p = projects.find((x) => x.slug === params.slug);
   if (!p) notFound();
   return (

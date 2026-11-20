@@ -1,6 +1,7 @@
-import { experience } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function ExperienceTimeline() {
+export default async function ExperienceTimeline() {
+  const { experience } = await getContent();
   return (
     <ol className="relative space-y-10 border-l border-white/15 pl-8">
       {experience.map((j) => (

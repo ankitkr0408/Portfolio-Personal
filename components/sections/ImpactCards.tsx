@@ -1,6 +1,7 @@
-import { impact, linkedinPosts } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function ImpactCards() {
+export default async function ImpactCards() {
+  const { impact, linkedinPosts } = await getContent();
   return (
     <div className="space-y-16">
       <div className="grid gap-6 md:grid-cols-3">

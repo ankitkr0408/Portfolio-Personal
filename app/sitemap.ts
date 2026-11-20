@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
-import { caseStudies, projects, services, siteUrl } from "@/lib/data";
+import { getContent } from "@/lib/content";
+import { siteUrl } from "@/lib/data";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { caseStudies, projects, services } = await getContent();
   const fixed = ["", "/about", "/projects", "/services", "/impact", "/freelance", "/experience", "/skills", "/github", "/mentoring", "/blog", "/contact"];
   const dynamic = [
     ...projects.map((p) => `/projects/${p.slug}`),

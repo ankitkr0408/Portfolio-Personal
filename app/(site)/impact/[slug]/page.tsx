@@ -3,19 +3,22 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import BlueprintHeading from "@/components/BlueprintHeading";
 import CaseText from "@/components/CaseText";
-import { caseStudies } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const { caseStudies } = await getContent();
   return caseStudies.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { caseStudies } = await getContent();
   const c = caseStudies.find((x) => x.slug === params.slug);
   if (!c) return {};
   return { title: `${c.client} — Case Study`, description: `${c.built} ${c.outcome}` };
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
+  const { caseStudies } = await getContent();
   const c = caseStudies.find((x) => x.slug === params.slug);
   if (!c) notFound();
   return (

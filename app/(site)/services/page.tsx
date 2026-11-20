@@ -1,13 +1,14 @@
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import { services } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
 export const metadata = {
   title: "Services",
   description: "Web development, mobile apps, AI and DevOps consulting, and landing pages by a freelance engineer.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const { services } = await getContent();
   return (
     <section>
       <PageHeader eyebrow="Services" title="What I build">

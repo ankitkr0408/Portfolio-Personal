@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Avatar from "../Avatar";
-import { profile } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function About() {
+export default async function About() {
+  const { profile } = await getContent();
   return (
     <section className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 px-6 py-20 md:flex-row">
       <Avatar src={profile.photo} name={profile.name} size={176} />

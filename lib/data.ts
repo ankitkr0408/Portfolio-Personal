@@ -1,4 +1,6 @@
-// All site content lives here. Later the admin/CMS will replace this file with DB reads.
+// DEFAULT site content. This file is the seed/fallback: the admin portal (/admin) stores
+// edits in MongoDB and the site reads them through lib/content.ts. If MongoDB is not
+// configured (or a section was never edited) the values below are used.
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const profile = {
@@ -337,3 +339,48 @@ export const freelanceFacts = [
 
 // Brand identity: the two handles used for search / SEO.
 export const brandNames = ["ankit.aitalks", "ankitkr.0408"];
+
+/* ---------------- shared types + defaults bundle ---------------- */
+
+export type Profile = typeof profile;
+export type CaseStudy = (typeof caseStudies)[number];
+export type WorkflowStep = (typeof workflow)[number];
+export type Service = (typeof services)[number];
+export type Hat = (typeof hats)[number];
+export type FreelanceFact = (typeof freelanceFacts)[number];
+export type LinkedinPost = (typeof linkedinPosts)[number];
+
+// Everything the public site renders. Each key is one editable section in /admin.
+export type SiteContent = {
+  profile: Profile;
+  projects: Project[];
+  caseStudies: CaseStudy[];
+  experience: Job[];
+  services: Service[];
+  hats: Hat[];
+  workflow: WorkflowStep[];
+  freelanceFacts: FreelanceFact[];
+  skills: Record<string, string[]>;
+  sites: string[];
+  impact: Impact[];
+  linkedinPosts: LinkedinPost[];
+  brandNames: string[];
+};
+
+export type SectionKey = keyof SiteContent;
+
+export const defaultContent: SiteContent = {
+  profile,
+  projects,
+  caseStudies,
+  experience,
+  services,
+  hats,
+  workflow,
+  freelanceFacts,
+  skills,
+  sites,
+  impact,
+  linkedinPosts,
+  brandNames,
+};

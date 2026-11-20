@@ -1,6 +1,7 @@
-import { workflow } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function ProcessSteps() {
+export default async function ProcessSteps() {
+  const { workflow } = await getContent();
   return (
     <div className="grid gap-5 md:grid-cols-4">
       {workflow.map((p) => (

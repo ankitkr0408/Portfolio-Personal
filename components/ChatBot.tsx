@@ -1,8 +1,9 @@
 "use client";
 
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
-import { profile } from "@/lib/data";
-import { answer, STARTER_QUESTIONS } from "@/lib/botBrain";
+import type { SiteContent } from "@/lib/data";
+import AskIcon from "./AskIcon";
+import { answer, setBotContent, STARTER_QUESTIONS } from "@/lib/botBrain";
 
 type Msg = { role: "user" | "assistant"; content: string; chips?: string[] };
 
@@ -107,12 +108,6 @@ function Markdown({ text }: { text: string }) {
 
 /* ---------- icons ---------- */
 
-const Sparkles = ({ className = "" }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-    <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
-    <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" />
-  </svg>
-);
 const Close = ({ className = "" }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={className} aria-hidden>
     <path d="M6 6l12 12M18 6L6 18" />
@@ -136,7 +131,12 @@ const Refresh = ({ className = "" }) => (
 
 /* ---------- component ---------- */
 
-export default function ChatBot() {
+export default function ChatBot({ content }: { content: SiteContent }) {
+  const { profile } = content;
+  // The bot answers from the same (admin-editable) content the pages render.
+  useEffect(() => {
+    setBotContent(content);
+  }, [content]);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -272,12 +272,11 @@ export default function ChatBot() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close chat assistant" : "Ask Ankit's assistant"}
         aria-expanded={open}
-        className={`fixed right-4 z-[60] flex items-center gap-2 rounded-full border border-white/15 bg-gradient-to-br from-rose-500 to-pink-600 p-3.5 text-white shadow-2xl shadow-rose-900/40 transition hover:scale-105 active:scale-95 sm:right-6 sm:px-5 sm:py-3.5 ${open ? "max-sm:hidden" : ""}`}
+        className={`group fixed right-4 z-[60] grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-neutral-900 text-white transition hover:scale-105 hover:bg-neutral-800 active:scale-95 sm:right-6 ${open ? "max-sm:hidden" : ""}`}
         style={{ bottom: "max(5.5rem, calc(env(safe-area-inset-bottom) + 5rem))" }}
       >
-        {!open && <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-rose-500/30 [animation-duration:2.5s]" aria-hidden />}
-        {open ? <Close className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
-        <span className="hidden text-sm font-medium sm:inline">{open ? "Close" : "Ask me anything"}</span>
+        {open ? <Close className="h-4 w-4" /> : <AskIcon className="ask-wiggle h-5 w-5" />}
+        <span className="pointer-events-none absolute right-full mr-2 hidden whitespace-nowrap rounded-full bg-neutral-900 px-3 py-1 text-xs text-white opacity-0 transition group-hover:opacity-100 sm:block">{open ? "Close" : "Ask me anything"}</span>
       </button>
 
       {/* Panel */}

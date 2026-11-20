@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { profile } from "@/lib/data";
+import type { Profile } from "@/lib/data";
 
 const links = [
   ["/about", "About"], ["/projects", "Projects"], ["/services", "Services"], ["/impact", "Impact"],
@@ -7,7 +7,7 @@ const links = [
   ["/mentoring", "Mentoring"], ["/blog", "Blog"], ["/contact", "Contact"],
 ];
 
-export default function Footer() {
+export default function Footer({ profile }: { profile: Profile }) {
   return (
     <footer className="border-t border-white/10 bg-neutral-950">
       <div className="mx-auto max-w-6xl space-y-4 px-6 pb-36 pt-8 text-sm text-neutral-500">

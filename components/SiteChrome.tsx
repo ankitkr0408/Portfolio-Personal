@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Dock from "./Dock";
 import Footer from "./Footer";
-import { profile } from "@/lib/data";
+import type { Profile } from "@/lib/data";
 
-export default function SiteChrome({ children }: { children: React.ReactNode }) {
+export default function SiteChrome({ profile, children }: { profile: Profile; children: React.ReactNode }) {
   const pathname = usePathname();
   const isLanding = pathname === "/";
 
@@ -14,7 +14,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
     return (
       <>
         {children}
-        <Dock />
+        <Dock profile={profile} />
       </>
     );
   }
@@ -28,8 +28,8 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         </Link>
       </header>
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12">{children}</main>
-      <Footer />
-      <Dock />
+      <Footer profile={profile} />
+      <Dock profile={profile} />
     </>
   );
 }

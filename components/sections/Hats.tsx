@@ -1,6 +1,7 @@
-import { hats } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function Hats() {
+export default async function Hats() {
+  const { hats } = await getContent();
   return (
     <div className="grid gap-5 md:grid-cols-3">
       {hats.map((h) => (

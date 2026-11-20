@@ -1,12 +1,13 @@
 import PageHeader from "@/components/PageHeader";
-import { profile } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
 export const metadata = {
   title: "Contact",
   description: "Get in touch to build, automate or fix your software.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const { profile } = await getContent();
   return (
     <section className="max-w-2xl">
       <PageHeader eyebrow="Contact" title="Let's talk">

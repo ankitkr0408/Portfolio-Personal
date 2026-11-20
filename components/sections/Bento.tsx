@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { createSwapy } from "swapy";
 import Avatar from "../Avatar";
-import { profile, projects } from "@/lib/data";
+import type { Impact, Profile, Project } from "@/lib/data";
 
 const STACK = ["Next.js", "Node.js", "NestJS", "Python", "LLMs", "RAG", "AWS", "PostgreSQL", "CI/CD"];
 
 const tile = "h-full w-full overflow-hidden rounded-3xl p-6 cursor-grab active:cursor-grabbing select-none";
 
-export default function Bento() {
+export default function Bento({ profile, featured: feat, event }: { profile: Profile; featured?: Project; event?: Impact }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,8 +23,6 @@ export default function Bento() {
     });
     return () => swapy.destroy();
   }, []);
-
-  const feat = projects[0];
 
   return (
     <div>
@@ -78,19 +76,23 @@ export default function Bento() {
         <div data-swapy-slot="work" className="md:col-span-2">
           <div data-swapy-item="work" className={`${tile} flex flex-col justify-between bg-[#d6b4ff] text-black`}>
             <p className="text-sm text-black/60">Featured project</p>
-            <div>
-              <p className="text-2xl font-bold">{feat.title}</p>
-              <p className="mt-1 text-sm text-black/70">{feat.blurb}</p>
-              <Link href={`/projects/${feat.slug}`} className="mt-3 inline-block text-sm font-medium underline underline-offset-4">View project →</Link>
-            </div>
+            {feat ? (
+              <div>
+                <p className="text-2xl font-bold">{feat.title}</p>
+                <p className="mt-1 text-sm text-black/70">{feat.blurb}</p>
+                <Link href={`/projects/${feat.slug}`} className="mt-3 inline-block text-sm font-medium underline underline-offset-4">View project →</Link>
+              </div>
+            ) : (
+              <Link href="/projects" className="text-sm font-medium underline underline-offset-4">See projects →</Link>
+            )}
           </div>
         </div>
 
         {/* Mentoring */}
         <div data-swapy-slot="mentor" className="md:col-span-1">
           <div data-swapy-item="mentor" className={`${tile} flex flex-col justify-between bg-[#f7d1e8] text-black`}>
-            <span className="w-fit rounded-md border border-black/40 px-2 py-0.5 text-xs">JUDGE · MAR 2026</span>
-            <Link href="/mentoring" className="font-semibold leading-snug hover:underline">PCE Hackathon 2026 →</Link>
+            <span className="w-fit rounded-md border border-black/40 px-2 py-0.5 text-xs">{event ? `${event.tag} · ${event.date}` : "MENTORING"}</span>
+            <Link href="/mentoring" className="font-semibold leading-snug hover:underline">{event ? event.title : "Hackathons & mentoring"} →</Link>
           </div>
         </div>
 

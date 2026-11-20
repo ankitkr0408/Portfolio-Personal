@@ -2,14 +2,15 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import CaseStudies from "@/components/sections/CaseStudies";
-import { freelanceFacts as facts } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
 export const metadata = {
   title: "Freelance",
   description: "Hire a freelance full-stack AI engineer for web, mobile and automation projects.",
 };
 
-export default function FreelancePage() {
+export default async function FreelancePage() {
+  const { freelanceFacts: facts } = await getContent();
   return (
     <section className="space-y-20">
       <div>

@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { projects } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function ProjectGrid({ onlyFeatured = false }: { onlyFeatured?: boolean }) {
+export default async function ProjectGrid({ onlyFeatured = false }: { onlyFeatured?: boolean }) {
+  const { projects } = await getContent();
   const list = onlyFeatured ? projects.filter((p) => p.featured) : projects;
   return (
     <div className="grid gap-5 md:grid-cols-3">

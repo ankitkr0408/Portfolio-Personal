@@ -1,12 +1,13 @@
 import PageHeader from "@/components/PageHeader";
-import { linkedinPosts, profile } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
 export const metadata = {
   title: "Blog",
   description: "Writing on engineering, automation and building products.",
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const { linkedinPosts, profile } = await getContent();
   return (
     <section className="max-w-3xl space-y-6">
       <PageHeader eyebrow="Blog" title="Writing">Long-form posts are coming. For now I share what I&apos;m building and learning on LinkedIn.</PageHeader>

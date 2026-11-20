@@ -25,6 +25,26 @@ Next.js 14 (App Router) + TypeScript + Tailwind CSS.
 - `/impact` — Impact
 - `/contact` — Contact (ankit75kumar3e@gmail.com)
 
+## Admin portal (`/admin`)
+
+A password-protected CMS for everything on the site: profile, projects, case studies, experience, services, skills, impact and more. Edits are saved to MongoDB and go live immediately (no redeploy). `lib/data.ts` stays as the built-in default/seed, so the site still works if MongoDB is unavailable.
+
+Setup:
+
+1. Create a free MongoDB Atlas cluster and copy its connection string.
+2. Copy `.env.example` to `.env.local` and fill in `MONGODB_URI`, `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` (`openssl rand -hex 32`).
+3. Add the same variables in Vercel → Project Settings → Environment Variables, then redeploy.
+4. Open `/admin` and sign in.
+
+What it does:
+
+- Form editors per section: add, edit, duplicate, delete and reorder items; validation (slugs, URLs, required fields) before saving.
+- **Needs attention** on the dashboard flags placeholders (demo LinkedIn URL, demo photos, missing links).
+- Every save snapshots the previous version: restore any of the last 10 revisions, or reset a section to the defaults.
+- The chat bot, sitemap, SEO metadata and all pages read the same edited content.
+
+Security: signed httpOnly cookie (7 days), middleware plus per-action auth checks, login attempt limiting, `noindex` and `Disallow: /admin`. Use a long random `ADMIN_PASSWORD`.
+
 ## Getting started
 
 ```bash

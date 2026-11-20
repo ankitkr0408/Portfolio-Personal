@@ -1,6 +1,7 @@
-import { skills, sites } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function Skills() {
+export default async function Skills() {
+  const { skills, sites } = await getContent();
   return (
     <div className="space-y-10">
       <div className="grid gap-6 md:grid-cols-2">
